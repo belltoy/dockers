@@ -22,7 +22,7 @@ RUN . $NVM_DIR/nvm.sh && \
 RUN . $NVM_DIR/nvm.sh && \
     nvm use default && \
     npm install -g npm && \
-    npm install -g grunt gulp gulp-cli \
+    npm install -g grunt gulp \
         bower jshint jscs \
         nodemon pm2
 
