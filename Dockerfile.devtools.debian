@@ -1,5 +1,6 @@
 FROM belltoy/devbase
 MAINTAINER belltoy <belltoy@gmail.com>
+USER root
 
 RUN apt-get update
 RUN apt-get -y install openssh-server emacs23-nox htop screen vim-nox tmux
