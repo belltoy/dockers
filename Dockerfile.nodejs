@@ -23,7 +23,7 @@ RUN . $NVM_DIR/nvm.sh && \
     nvm use default && \
     npm install -g npm && \
     npm install -g grunt gulp gulp-cli \
-        express-generator bower jshint jscs \
+        bower jshint jscs \
         nodemon pm2 yo
 
 WORKDIR /workspace
