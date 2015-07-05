@@ -24,7 +24,7 @@ RUN . $NVM_DIR/nvm.sh && \
     npm install -g npm && \
     npm install -g grunt gulp gulp-cli \
         bower jshint jscs \
-        nodemon pm2 yo
+        nodemon pm2
 
 WORKDIR /workspace
 
