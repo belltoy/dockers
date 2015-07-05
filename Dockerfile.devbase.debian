@@ -1,0 +1,38 @@
+FROM debian:jessie
+MAINTAINER belltoy <belltoy@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+ENV USER lucy
+
+RUN apt-get update
+RUN apt-get install -y sudo wget curl locales
+RUN apt-get install -y ruby ruby-dev build-essential git python
+RUN apt-get install -y libruby libxslt-dev libxml2-dev
+RUN apt-get install -y unzip
+RUN apt-get install -y zsh
+RUN apt-get clean
+
+# For debugging
+RUN apt-get install -y gdb strace
+
+# Set the locale
+RUN sed -i '/en_US.UTF-8 UTF-8/s/^#\s\+//' /etc/locale.gen
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+RUN locale-gen en_US.UTF-8
+
+# Set up my user
+RUN adduser $USER -u 1000 --gecos "" --disabled-password --shell /bin/zsh --home /home/$USER
+ADD assets/lucy.sudoer /etc/sudoers.d/lucy
+
+# Set up gem
+RUN gem install -n /usr/bin bundler
+RUN gem install -n /usr/bin rake
+
+WORKDIR /workspace
+
+VOLUME ["/workspace"]
+USER lucy
+EXPOSE 3000
