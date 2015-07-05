@@ -1,0 +1,18 @@
+FROM belltoy/devbase
+MAINTAINER belltoy <belltoy@gmail.com>
+
+RUN apt-get update
+RUN apt-get -y install openssh-server emacs23-nox htop screen vim-nox tmux
+
+# For debugging
+RUN apt-get -y install telnet tcpdump
+
+# Man pages and "most" viewer:
+RUN apt-get install -y man most
+
+RUN mkdir /var/run/sshd
+ENTRYPOINT /usr/sbin/sshd -D
+
+VOLUME ["/workspace"]
+USER lucy
+EXPOSE 22
