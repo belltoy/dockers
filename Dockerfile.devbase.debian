@@ -7,7 +7,7 @@ ENV USER lucy
 
 RUN apt-get update
 RUN apt-get install -y apt-utils
-RUN apt-get install -y apt-utils sudo wget curl locales
+RUN apt-get install -y sudo wget curl locales
 RUN apt-get install -y ruby ruby-dev build-essential git python
 RUN apt-get install -y libruby libxslt-dev libxml2-dev
 RUN apt-get install -y unzip
