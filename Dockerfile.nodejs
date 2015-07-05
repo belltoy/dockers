@@ -1,0 +1,34 @@
+FROM belltoy/devbase
+MAINTAINER belltoy <belltoy@gmail.com>
+ENV DEBIAN_FRONTEND noninteractive
+
+USER root
+
+# Install nvm
+ENV NVM_DIR /usr/local/nvm
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.2/install.sh | bash
+
+RUN . $NVM_DIR/nvm.sh && \
+    nvm install 0.12 && \
+    nvm install 0.10 && \
+    nvm install iojs-v2.3
+
+ENV NVM_SYMLINK_CURRENT false
+RUN mkdir -p $NVM_DIR/alias
+
+RUN . $NVM_DIR/nvm.sh && \
+    nvm alias default 0.12
+
+RUN . $NVM_DIR/nvm.sh && \
+    nvm use default && \
+    npm install -g npm && \
+    npm install -g grunt gulp gulp-cli \
+        express-generator bower jshint jscs \
+        nodemon pm2 yo
+
+WORKDIR /workspace
+
+VOLUME ["/workspace"]
+USER lucy
+RUN echo '. $NVM_DIR/nvm.sh' >> ~/.zshrc
+EXPOSE 3000
