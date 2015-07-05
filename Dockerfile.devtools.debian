@@ -11,6 +11,8 @@ RUN apt-get -y install telnet tcpdump
 # Man pages and "most" viewer:
 RUN apt-get install -y man most
 
+RUN apt-get clean
+
 RUN mkdir /var/run/sshd
 ENTRYPOINT /usr/sbin/sshd -D
 
